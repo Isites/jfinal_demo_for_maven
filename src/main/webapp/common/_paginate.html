@@ -6,44 +6,46 @@
 	<#local endPage = currentPage + 4>
 	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
 	
-	<div class="pagination">
-			<#if (currentPage <= 8)>
-				<#local startPage = 1>
-			</#if>
-			<#if ((totalPage - currentPage) < 8)>
-				<#local endPage = totalPage>
-			</#if>
+<nav>
+  <ul class="pagination">
+	<#if (currentPage <= 8)>
+		<#local startPage = 1>
+	</#if>
+	<#if ((totalPage - currentPage) < 8)>
+		<#local endPage = totalPage>
+	</#if>
 			
-			<#if (currentPage == 1)>
-				<span class="disabled prev_page">上页</span>
-			<#else>
-				<a href="${actionUrl}#{currentPage - 1}${urlParas!}" class="prev_page">上页</a>
-			</#if>
+	<#if (currentPage == 1)>
+	<li class="disabled"><a href="#">上页</a></li>
+	<#else>
+	<li><a href="${actionUrl}#{currentPage - 1}${urlParas!}">上页</a></li>
+	</#if>
 			
-			<#if (currentPage > 8)>
-				<a href="${actionUrl}#{1}${urlParas!}">#{1}</a>
-				<a href="${actionUrl}#{2}${urlParas!}">#{2}</a>
-				<span class="gap">…</span>
-			</#if>
+	<#if (currentPage > 8)>
+	<li><a href="${actionUrl}#{1}${urlParas!}">#{1}</a></li>
+	<li><a href="${actionUrl}#{2}${urlParas!}">#{2}</a></li>
+	<li class="disabled"><a href="#">...</a></li>
+	</#if>
 			
-			<#list startPage..endPage as i>
-				<#if currentPage == i>
-					<span class="current">#{i}</span>
-				<#else>
-					<a href="${actionUrl}#{i}${urlParas!}">#{i}</a>
-				</#if>
-			</#list>
+	<#list startPage..endPage as i>
+		<#if currentPage == i>
+	<li class="active"><a href="#">#{i} <span class="sr-only">(current)</span></a></li>
+		<#else>
+	<li><a href="${actionUrl}#{i}${urlParas!}">#{i}</a></li>
+		</#if>
+	</#list>
 			
-			<#if ((totalPage - currentPage) >= 8)>
-				<span class="gap">…</span>
-				<a href="${actionUrl}#{totalPage - 1}${urlParas!}">#{totalPage - 1}</a>
-				<a href="${actionUrl}#{totalPage}${urlParas!}">#{totalPage}</a>
-			</#if>
-			
-			<#if (currentPage == totalPage)>
-				<span class="disabled next_page">下页</span>
-			<#else>
-				<a href="${actionUrl}#{currentPage + 1}${urlParas!}" class="next_page" rel="next">下页</a>
-			</#if>
-	</div>
+	<#if ((totalPage - currentPage) >= 8)>
+	<li class="disabled"><a href="#">...</a></li>
+	<li><a href="${actionUrl}#{totalPage - 1}${urlParas!}">#{totalPage - 1}</a></li>
+	<li><a href="${actionUrl}#{totalPage}${urlParas!}">#{totalPage}</a></li>
+	</#if>
+		
+	<#if (currentPage == totalPage)>
+	<li class="disabled"><a href="#">下页</a></li>
+	<#else>
+	<li><a href="${actionUrl}#{currentPage + 1}${urlParas!}" class="next_page" rel="next">下页</a></li>
+	</#if>
+  </ul>
+</nav>
 </#macro>
